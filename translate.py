@@ -1,4 +1,4 @@
-#!/usr/bin/python -dOO
+#!/usr/bin/python 
 
 import cjson
 import urllib2, urllib
