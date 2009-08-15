@@ -1,0 +1,39 @@
+pyTranslate - 1.0
+===============================================================================
+
+python script for accessing google language tools
+
+
+Installation
+===============================================================================
+
+$ sudo aptitude install pyhton-cjson # for debian 
+$ sudo python setup.py install
+
+
+Usage
+===============================================================================
+
+Guess language
+
+	$ translate.py -g 
+	Ich bin ein Satz in Deutsch.
+	GERMAN
+	
+Translate from German to English:
+
+	./translate.py -f de -t en
+	Ich bin ein Satz in Deutsch.
+	I am a sentence in German.
+
+For more help see: 
+	
+	translate -h
+	
+License
+===============================================================================
+
+	Creative-Commons: cc-nc-by-sa
+
+
+

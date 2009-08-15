@@ -1,7 +1,22 @@
 #!/usr/bin/python 
+"""
+Script and Module for accessing google translation services.
 
+You can:
+* Translate texts
+* Find Language of a text
+
+@languages@ dict is the table for iso names
+
+"""
 import cjson
 import urllib2, urllib
+
+
+__author__="Alexander Weigl <alexweigl@gmail.com>"
+__version__="1.0"
+__date__="15. August 2009"
+
 
 languages = {
     'ARABIC' : 'ar',
@@ -49,17 +64,25 @@ languages = {
 }
 
 def iso2name(iso):
+    "Translate the iso language code to an name for human reading"
     for key,value in languages.iteritems():
         if value == iso:
             return key;
 
 def name2iso(name):
+    "Translate a language name to the iso language code"
     for key, value in languages.iteritems():
         if key == name:
             return value;
     
 
 class LanguageDetection:
+    """Interface for language detection
+    Usage:
+    >>> l = LanguageDetection()
+    >>> l("I need Help!")
+    en
+    """
     def __init__(self):
         pass
     
@@ -70,6 +93,9 @@ class LanguageDetection:
         return request
 
     def detection(self, text):
+        """
+        sends the request for language detection
+        """
         r = self._buildRequest( text )
         handle = urllib2.urlopen( r )
         line = handle.readline()
@@ -85,12 +111,21 @@ class LanguageDetection:
         return response['responseData']
 
     def __call__(self,text):
+        """same as @self.detection(text)['language']@"""
         return self.detection(text)['language']
 
     host = 'http://ajax.googleapis.com/ajax/services/language/detect?' 
 
 
 class Translator:
+    """Translate a text from one language to another
+    Give the Language in the constructor, using the iso language codes
+
+    Example:
+    >>> t = Translator() // de -> en
+    >>> t("Ich brauche Hilfe")
+    I need help
+    """
     def __init__(self, from_lang='de', to_lang='en'):
         self.from_lang= from_lang;
         self.to_lang  = to_lang;
